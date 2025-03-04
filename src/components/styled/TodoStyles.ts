@@ -4,6 +4,7 @@ export const TodoContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xl};
   padding: ${({ theme }) => theme.spacing.xl};
+  padding-bottom: calc(${({ theme }) => theme.spacing.xl} + 80px);
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.background};
 `;
@@ -179,7 +180,7 @@ export const TodoText = styled.span<{ completed?: boolean }>`
 
 export const CreateButton = styled.button`
   position: fixed;
-  bottom: ${({ theme }) => theme.spacing.xl};
+  bottom: calc(${({ theme }) => theme.spacing.xl} + 80px);
   right: ${({ theme }) => theme.spacing.xl};
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
@@ -191,6 +192,7 @@ export const CreateButton = styled.button`
   cursor: pointer;
   box-shadow: ${({ theme }) => theme.shadows.medium};
   transition: transform 0.2s;
+  z-index: 99;
 
   &:hover {
     transform: scale(1.1);
