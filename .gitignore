@@ -7,6 +7,7 @@
 /coverage
 
 #cursor
+.cursor/rules
 .cursorrules
 
 # Production
