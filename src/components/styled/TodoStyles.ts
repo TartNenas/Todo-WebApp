@@ -6,7 +6,16 @@ export const TodoContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.xl};
   padding-bottom: calc(${({ theme }) => theme.spacing.xl} + 80px);
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
+  --color: #E1E1E1;
+  background-color: #F3F3F3;
+  background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+  background-size: 55px 55px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const Column = styled.div`
