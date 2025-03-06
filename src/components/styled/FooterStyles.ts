@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.shadows.medium};
@@ -12,7 +10,7 @@ export const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
-  z-index: 100;
+  margin-top: auto;
 `;
 
 export const GithubLink = styled.a`

@@ -45,7 +45,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ onClose, onSubmit }) => {
             <Input
               type="text"
               value={formData.title}
-              onChange={e => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e: { target: { value: any; }; }) => setFormData({ ...formData, title: e.target.value })}
               required
             />
           </FormGroup>
@@ -64,7 +64,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ onClose, onSubmit }) => {
             <Input
               type="date"
               value={formData.dueDate}
-              onChange={e => setFormData({ ...formData, dueDate: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, dueDate: e.target.value })}
               required
             />
           </FormGroup>

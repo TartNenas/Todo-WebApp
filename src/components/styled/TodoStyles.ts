@@ -4,8 +4,7 @@ export const TodoContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xl};
   padding: ${({ theme }) => theme.spacing.xl};
-  padding-bottom: calc(${({ theme }) => theme.spacing.xl} + 80px);
-  min-height: 100vh;
+  flex: 1;
   --color: #E1E1E1;
   background-color: #F3F3F3;
   background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
@@ -15,6 +14,8 @@ export const TodoContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: column;
     align-items: stretch;
+    padding: ${({ theme }) => theme.spacing.md};
+    gap: ${({ theme }) => theme.spacing.md};
   }
 `;
 
@@ -25,6 +26,11 @@ export const Column = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   box-shadow: ${({ theme }) => theme.shadows.medium};
   min-width: 300px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    min-width: unset;
+    padding: ${({ theme }) => theme.spacing.md};
+  }
 `;
 
 export const ColumnHeader = styled.div`
@@ -127,16 +133,49 @@ export const TodoForm = styled.form`
   }
 `;
 
-export const TodoInput = styled.input`
-  flex: 1;
+export const Input = styled.input`
   padding: ${({ theme }) => theme.spacing.sm};
   border: 1px solid ${({ theme }) => theme.colors.gray.light};
   border-radius: ${({ theme }) => theme.borderRadius};
   font-size: ${({ theme }) => theme.typography.fontSize.medium};
+  position: relative;
+  z-index: 1;
+  background-color: ${({ theme }) => theme.colors.white};
 
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary};
+  }
+
+  /* Specific styles for date input */
+  &[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 48px;
+    cursor: pointer;
+    position: relative;
+    
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Custom calendar icon */
+    &::after {
+      content: "📅";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
   }
 `;
 
@@ -203,6 +242,14 @@ export const CreateButton = styled.button`
   transition: transform 0.2s;
   z-index: 99;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    bottom: calc(${({ theme }) => theme.spacing.md} + 80px);
+    right: ${({ theme }) => theme.spacing.md};
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
   &:hover {
     transform: scale(1.1);
   }
@@ -228,6 +275,14 @@ export const ModalContent = styled.div`
   width: 100%;
   max-width: 500px;
   box-shadow: ${({ theme }) => theme.shadows.large};
+  margin: ${({ theme }) => theme.spacing.md};
+  position: relative;
+  z-index: 1001;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: ${({ theme }) => theme.spacing.md};
+    margin: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 export const Form = styled.form`
@@ -245,18 +300,6 @@ export const FormGroup = styled.div`
 export const Label = styled.label`
   font-size: ${({ theme }) => theme.typography.fontSize.small};
   color: ${({ theme }) => theme.colors.gray.dark};
-`;
-
-export const Input = styled.input`
-  padding: ${({ theme }) => theme.spacing.sm};
-  border: 1px solid ${({ theme }) => theme.colors.gray.light};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  font-size: ${({ theme }) => theme.typography.fontSize.medium};
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.primary};
-  }
 `;
 
 export const TextArea = styled.textarea`
@@ -291,4 +334,12 @@ export const ButtonGroup = styled.div`
   justify-content: flex-end;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-top: ${({ theme }) => theme.spacing.md};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    flex-direction: column;
+    
+    ${StyledButton} {
+      width: 100%;
+    }
+  }
 `; 
