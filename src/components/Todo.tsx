@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
+  MainLayout,
+  AppContainer,
+  ContentWrapper,
+  ContentArea,
   TodoContainer,
   Column,
   ColumnHeader,
@@ -10,9 +14,11 @@ import {
   TodoMeta,
   DueDate,
   PriorityLabel,
-  CreateButton,
+  StyledButton,
 } from './styled/TodoStyles';
 import TodoForm from './TodoForm';
+import WeeklyTodo from './WeeklyTodo';
+import Sidebar from './Sidebar';
 
 interface TodoItem {
   id: number;
@@ -32,6 +38,7 @@ const Todo: React.FC = () => {
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [selectedColumn, setSelectedColumn] = useState<'todo' | 'ongoing' | 'completed'>('todo');
 
   // Save to localStorage whenever todos change
   useEffect(() => {
@@ -52,82 +59,102 @@ const Todo: React.FC = () => {
     const newTodo: TodoItem = {
       ...todoData,
       id: Date.now(),
-      status: 'todo',
+      status: selectedColumn,
     };
     setTodos([...todos, newTodo]);
   };
 
+  const openFormForColumn = (status: 'todo' | 'ongoing' | 'completed') => {
+    setSelectedColumn(status);
+    setIsFormOpen(true);
+  };
+
   return (
-    <>
-      <TodoContainer>
-        <Column>
-          <ColumnHeader>
-            <StatusDot status="todo" />
-            <h2>To Do</h2>
-            <span>({filterTodosByStatus('todo').length})</span>
-          </ColumnHeader>
-          {filterTodosByStatus('todo').map(todo => (
-            <TodoCard
-              key={todo.id}
-              onClick={() => moveTask(todo.id, 'ongoing')}
-            >
-              <TodoTitle>{todo.title}</TodoTitle>
-              <TodoDescription>{todo.description}</TodoDescription>
-              <TodoMeta>
-                <DueDate>Due: {todo.dueDate}</DueDate>
-                <PriorityLabel priority={todo.priority}>
-                  {todo.priority}
-                </PriorityLabel>
-              </TodoMeta>
-            </TodoCard>
-          ))}
-        </Column>
+    <MainLayout>
+      <AppContainer>
+        <Sidebar />
+        <ContentWrapper>
+          <ContentArea>
+            <WeeklyTodo />
+            <TodoContainer>
+              <Column>
+                <ColumnHeader>
+                  <StatusDot status="todo" />
+                  <h2>To Do</h2>
+                  <span>({filterTodosByStatus('todo').length})</span>
+                  <StyledButton onClick={() => openFormForColumn('todo')} style={{ marginLeft: 'auto' }}>
+                    + Add Todo
+                  </StyledButton>
+                </ColumnHeader>
+                {filterTodosByStatus('todo').map(todo => (
+                  <TodoCard
+                    key={todo.id}
+                    onClick={() => moveTask(todo.id, 'ongoing')}
+                  >
+                    <TodoTitle>{todo.title}</TodoTitle>
+                    <TodoDescription>{todo.description}</TodoDescription>
+                    <TodoMeta>
+                      <DueDate>Due: {todo.dueDate}</DueDate>
+                      <PriorityLabel priority={todo.priority}>
+                        {todo.priority}
+                      </PriorityLabel>
+                    </TodoMeta>
+                  </TodoCard>
+                ))}
+              </Column>
 
-        <Column>
-          <ColumnHeader>
-            <StatusDot status="ongoing" />
-            <h2>Ongoing</h2>
-            <span>({filterTodosByStatus('ongoing').length})</span>
-          </ColumnHeader>
-          {filterTodosByStatus('ongoing').map(todo => (
-            <TodoCard
-              key={todo.id}
-              onClick={() => moveTask(todo.id, 'completed')}
-            >
-              <TodoTitle>{todo.title}</TodoTitle>
-              <TodoDescription>{todo.description}</TodoDescription>
-              <TodoMeta>
-                <DueDate>Due: {todo.dueDate}</DueDate>
-                <PriorityLabel priority={todo.priority}>
-                  {todo.priority}
-                </PriorityLabel>
-              </TodoMeta>
-            </TodoCard>
-          ))}
-        </Column>
+              <Column>
+                <ColumnHeader>
+                  <StatusDot status="ongoing" />
+                  <h2>Ongoing</h2>
+                  <span>({filterTodosByStatus('ongoing').length})</span>
+                  <StyledButton onClick={() => openFormForColumn('ongoing')} style={{ marginLeft: 'auto' }}>
+                    + Add Todo
+                  </StyledButton>
+                </ColumnHeader>
+                {filterTodosByStatus('ongoing').map(todo => (
+                  <TodoCard
+                    key={todo.id}
+                    onClick={() => moveTask(todo.id, 'completed')}
+                  >
+                    <TodoTitle>{todo.title}</TodoTitle>
+                    <TodoDescription>{todo.description}</TodoDescription>
+                    <TodoMeta>
+                      <DueDate>Due: {todo.dueDate}</DueDate>
+                      <PriorityLabel priority={todo.priority}>
+                        {todo.priority}
+                      </PriorityLabel>
+                    </TodoMeta>
+                  </TodoCard>
+                ))}
+              </Column>
 
-        <Column>
-          <ColumnHeader>
-            <StatusDot status="completed" />
-            <h2>Completed</h2>
-            <span>({filterTodosByStatus('completed').length})</span>
-          </ColumnHeader>
-          {filterTodosByStatus('completed').map(todo => (
-            <TodoCard key={todo.id}>
-              <TodoTitle>{todo.title}</TodoTitle>
-              <TodoDescription>{todo.description}</TodoDescription>
-              <TodoMeta>
-                <DueDate>Due: {todo.dueDate}</DueDate>
-                <PriorityLabel priority={todo.priority}>
-                  {todo.priority}
-                </PriorityLabel>
-              </TodoMeta>
-            </TodoCard>
-          ))}
-        </Column>
-      </TodoContainer>
-
-      <CreateButton onClick={() => setIsFormOpen(true)}>+</CreateButton>
+              <Column>
+                <ColumnHeader>
+                  <StatusDot status="completed" />
+                  <h2>Completed</h2>
+                  <span>({filterTodosByStatus('completed').length})</span>
+                  <StyledButton onClick={() => openFormForColumn('completed')} style={{ marginLeft: 'auto' }}>
+                    + Add Todo
+                  </StyledButton>
+                </ColumnHeader>
+                {filterTodosByStatus('completed').map(todo => (
+                  <TodoCard key={todo.id}>
+                    <TodoTitle>{todo.title}</TodoTitle>
+                    <TodoDescription>{todo.description}</TodoDescription>
+                    <TodoMeta>
+                      <DueDate>Due: {todo.dueDate}</DueDate>
+                      <PriorityLabel priority={todo.priority}>
+                        {todo.priority}
+                      </PriorityLabel>
+                    </TodoMeta>
+                  </TodoCard>
+                ))}
+              </Column>
+            </TodoContainer>
+          </ContentArea>
+        </ContentWrapper>
+      </AppContainer>
 
       {isFormOpen && (
         <TodoForm
@@ -135,8 +162,8 @@ const Todo: React.FC = () => {
           onSubmit={handleCreateTodo}
         />
       )}
-    </>
+    </MainLayout>
   );
 };
 
-export default Todo; 
+export default Todo;

@@ -1,20 +1,58 @@
 import styled from 'styled-components';
 
+export const MainLayout = styled.div`
+  display: flex;
+  min-height: 100vh;
+  max-width: 1619px;
+  margin: 0 auto;
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing.xl};
+  position: relative;
+  flex-direction: column;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: ${({ theme }) => theme.spacing.md};
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
+export const AppContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.xl};
+  flex: 1;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xl};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
+export const ContentArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xl};
+`;
+
 export const TodoContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xl};
-  padding: ${({ theme }) => theme.spacing.xl};
   flex: 1;
-  --color: #E1E1E1;
-  background-color: #F3F3F3;
-  background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
-  background-size: 55px 55px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: column;
     align-items: stretch;
-    padding: ${({ theme }) => theme.spacing.md};
     gap: ${({ theme }) => theme.spacing.md};
   }
 `;
@@ -228,7 +266,7 @@ export const TodoText = styled.span<{ completed?: boolean }>`
 
 export const CreateButton = styled.button`
   position: fixed;
-  bottom: calc(${({ theme }) => theme.spacing.xl} + 80px);
+  bottom: ${({ theme }) => theme.spacing.xl};
   right: ${({ theme }) => theme.spacing.xl};
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
@@ -240,10 +278,10 @@ export const CreateButton = styled.button`
   cursor: pointer;
   box-shadow: ${({ theme }) => theme.shadows.medium};
   transition: transform 0.2s;
-  z-index: 99;
+  z-index: 101;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    bottom: calc(${({ theme }) => theme.spacing.md} + 80px);
+    bottom: ${({ theme }) => theme.spacing.md};
     right: ${({ theme }) => theme.spacing.md};
     width: 48px;
     height: 48px;
