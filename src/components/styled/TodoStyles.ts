@@ -49,6 +49,8 @@ export const TodoContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xl};
   flex: 1;
+  max-width: 1273px;
+  margin: 0 auto;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: column;
@@ -63,10 +65,11 @@ export const Column = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: ${({ theme }) => theme.spacing.lg};
   box-shadow: ${({ theme }) => theme.shadows.medium};
-  min-width: 300px;
+  width: 400px;
+  min-height: 651px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    min-width: unset;
+    width: 100%;
     padding: ${({ theme }) => theme.spacing.md};
   }
 `;
@@ -380,4 +383,4 @@ export const ButtonGroup = styled.div`
       width: 100%;
     }
   }
-`; 
+`;

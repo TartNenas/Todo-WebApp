@@ -12,7 +12,6 @@ export const WeeklyHeader = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.light};
   padding-bottom: ${({ theme }) => theme.spacing.md};
 
   h2 {
@@ -37,7 +36,7 @@ export const TaskList = styled.div`
 
 export const TableHeader = styled.div`
   display: grid;
-  grid-template-columns: 40px 1fr 120px 120px;
+  grid-template-columns: 40px 1fr 120px 120px 80px;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
   padding: ${({ theme }) => theme.spacing.sm} 0;
@@ -51,7 +50,7 @@ export const TableHeader = styled.div`
 
 export const TaskRow = styled.div`
   display: grid;
-  grid-template-columns: 40px 1fr 120px 120px;
+  grid-template-columns: 40px 1fr 120px 120px 80px;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
   padding: ${({ theme }) => theme.spacing.sm} 0;
@@ -98,4 +97,11 @@ export const TaskCategory = styled.div`
   color: white;
   text-align: center;
   width: fit-content;
-`; 
+`;
+
+export const EmptyMessage = styled.div`
+  text-align: center;
+  padding: ${({ theme }) => theme.spacing.lg};
+  color: ${({ theme }) => theme.colors.gray.medium};
+  font-size: ${({ theme }) => theme.typography.fontSize.medium};
+`;

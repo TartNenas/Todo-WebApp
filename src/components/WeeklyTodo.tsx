@@ -9,6 +9,7 @@ import {
   TaskName,
   TaskStatus,
   TaskCategory,
+  EmptyMessage,
 } from './styled/WeeklyTodoStyles';
 import { StyledButton, Modal, ModalContent, Form, FormGroup, Label, Input, Select, ButtonGroup } from './styled/TodoStyles';
 
@@ -31,43 +32,7 @@ const WeeklyTodo: React.FC = () => {
     if (saved) {
       return JSON.parse(saved);
     }
-    return [
-      {
-        id: 1,
-        text: 'Repaint my ceiling',
-        completed: false,
-        status: 'not-started',
-        category: 'Personal'
-      },
-      {
-        id: 2,
-        text: 'Fix my phone\'s screen',
-        completed: false,
-        status: 'in-progress',
-        category: 'Personal'
-      },
-      {
-        id: 3,
-        text: 'Buy vegetables for the week',
-        completed: true,
-        status: 'done',
-        category: 'Health & Wellness'
-      },
-      {
-        id: 4,
-        text: 'Finish the English Presentation',
-        completed: false,
-        status: 'in-progress',
-        category: 'Work/School'
-      },
-      {
-        id: 5,
-        text: 'Buy new skincare products',
-        completed: true,
-        status: 'done',
-        category: 'Personal'
-      }
-    ];
+    return [];
   });
 
   useEffect(() => {
@@ -86,6 +51,10 @@ const WeeklyTodo: React.FC = () => {
       }
       return task;
     }));
+  };
+
+  const deleteTask = (taskId: number) => {
+    setTasks(prev => prev.filter(task => task.id !== taskId));
   };
 
   const handleAddTask = (e: React.FormEvent) => {
@@ -121,21 +90,40 @@ const WeeklyTodo: React.FC = () => {
           <div>Name</div>
           <div>Status</div>
           <div>Category</div>
+          <div>Actions</div>
         </TableHeader>
-        {tasks.map(task => (
-          <TaskRow key={task.id}>
-            <Checkbox
-              checked={task.completed}
-              onChange={() => toggleTask(task.id)}
-            />
-            <TaskName>{task.text}</TaskName>
-            <TaskStatus status={task.status}>
-              {task.status === 'not-started' ? 'Not started' : 
-               task.status === 'in-progress' ? 'In progress' : 'Done'}
-            </TaskStatus>
-            <TaskCategory>{task.category}</TaskCategory>
-          </TaskRow>
-        ))}
+        {tasks.length === 0 ? (
+          <EmptyMessage>No tasks</EmptyMessage>
+        ) : (
+          tasks.map(task => (
+            <TaskRow key={task.id}>
+              <Checkbox
+                checked={task.completed}
+                onChange={() => toggleTask(task.id)}
+              />
+              <TaskName>{task.text}</TaskName>
+              <TaskStatus status={task.status}>
+                {task.status === 'not-started' ? 'Not started' : 
+                 task.status === 'in-progress' ? 'In progress' : 'Done'}
+              </TaskStatus>
+              <TaskCategory>{task.category}</TaskCategory>
+              <div style={{ textAlign: 'center' }}>
+                <StyledButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteTask(task.id);
+                  }}
+                  variant="secondary"
+                  style={{ padding: '4px 8px', minWidth: 'auto' }}
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                  </svg>
+                </StyledButton>
+              </div>
+            </TaskRow>
+          ))
+        )}
       </TaskList>
 
       {isFormOpen && (
