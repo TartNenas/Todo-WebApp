@@ -6,22 +6,50 @@ import {
   MenuItem,
   IconWrapper,
 } from './styled/SidebarStyles';
-import { FaSun, FaMoon, FaBook, FaSchool, FaUser, FaDumbbell, FaBriefcase, FaUtensils } from 'react-icons/fa6';
+import { useRoutine } from '../context/RoutineContext';
+import { 
+  FiCalendar, 
+  FiSun, 
+  FiMoon, 
+  FiBook, 
+  FiBookOpen, 
+  FiUser, 
+  FiActivity, 
+  FiBriefcase, 
+  FiCoffee 
+} from 'react-icons/fi';
 
 const Sidebar: React.FC = () => {
+  const { selectedRoutine, setSelectedRoutine } = useRoutine();
+
   return (
     <SidebarContainer>
       <SectionTitle>Routines</SectionTitle>
       <MenuList>
-        <MenuItem>
+        <MenuItem 
+          onClick={() => setSelectedRoutine('weekly')}
+          className={selectedRoutine === 'weekly' ? 'active' : ''}
+        >
+          <IconWrapper $color="#4CAF50">
+            {FiCalendar({ size: 20 })}
+          </IconWrapper>
+          Weekly Tasks
+        </MenuItem>
+        <MenuItem 
+          onClick={() => setSelectedRoutine('morning')}
+          className={selectedRoutine === 'morning' ? 'active' : ''}
+        >
           <IconWrapper $color="#FF6B6B">
-            {FaSun({ size: 20 })}
+            {FiSun({ size: 20 })}
           </IconWrapper>
           Morning Routine
         </MenuItem>
-        <MenuItem>
+        <MenuItem 
+          onClick={() => setSelectedRoutine('night')}
+          className={selectedRoutine === 'night' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
-            {FaMoon({ size: 20 })}
+            {FiMoon({ size: 20 })}
           </IconWrapper>
           Night Routine
         </MenuItem>
@@ -30,38 +58,38 @@ const Sidebar: React.FC = () => {
       <SectionTitle>Categories</SectionTitle>
       <MenuList>
         <MenuItem>
-          <IconWrapper>
-            {FaBook({ size: 20 })}
+          <IconWrapper $color="#845EC2">
+            {FiBook({ size: 20 })}
           </IconWrapper>
           Journal
         </MenuItem>
         <MenuItem>
-          <IconWrapper>
-            {FaSchool({ size: 20 })}
+          <IconWrapper $color="#845EC2">
+            {FiBookOpen({ size: 20 })}
           </IconWrapper>
           School
         </MenuItem>
         <MenuItem>
-          <IconWrapper>
-            {FaUser({ size: 20 })}
+          <IconWrapper $color="#845EC2">
+            {FiUser({ size: 20 })}
           </IconWrapper>
           Personal
         </MenuItem>
         <MenuItem>
-          <IconWrapper>
-            {FaDumbbell({ size: 20 })}
+          <IconWrapper $color="#845EC2">
+            {FiActivity({ size: 20 })}
           </IconWrapper>
           Fitness
         </MenuItem>
         <MenuItem>
-          <IconWrapper>
-            {FaBriefcase({ size: 20 })}
+          <IconWrapper $color="#845EC2">
+            {FiBriefcase({ size: 20 })}
           </IconWrapper>
           Work
         </MenuItem>
         <MenuItem>
-          <IconWrapper>
-            {FaUtensils({ size: 20 })}
+          <IconWrapper $color="#845EC2">
+            {FiCoffee({ size: 20 })}
           </IconWrapper>
           Cooking
         </MenuItem>

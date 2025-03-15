@@ -5,6 +5,9 @@ export const theme = {
     background: '#f5f5f5',
     text: '#333333',
     white: '#ffffff',
+    weeklyGreen: '#4CAF50',
+    morningRed: '#FF6B6B',
+    nightPurple: '#845EC2',
     gray: {
       light: '#e0e0e0',
       medium: '#9e9e9e',

@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Changelog from './changelog';
 import styled from 'styled-components';
+import { RoutineProvider } from './context/RoutineContext';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -26,18 +27,20 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle theme={theme} />
-      <Router>
-        <AppWrapper>
-          <Navbar />
-          <ContentContainer>
-            <Routes>
-              <Route path="/" element={<Todo />} />
-              <Route path="/changelog" element={<Changelog />} />
-            </Routes>
-          </ContentContainer>
-          <Footer />
-        </AppWrapper>
-      </Router>
+      <RoutineProvider>
+        <Router>
+          <AppWrapper>
+            <Navbar />
+            <ContentContainer>
+              <Routes>
+                <Route path="/" element={<Todo />} />
+                <Route path="/changelog" element={<Changelog />} />
+              </Routes>
+            </ContentContainer>
+            <Footer />
+          </AppWrapper>
+        </Router>
+      </RoutineProvider>
     </ThemeProvider>
   );
 };

@@ -97,10 +97,10 @@ export const StatusDot = styled.div<{ status: 'todo' | 'ongoing' | 'completed' }
   border-radius: 50%;
   background-color: ${({ status, theme }) => 
     status === 'todo' 
-      ? theme.colors.secondary 
+      ? theme.colors.morningRed 
       : status === 'ongoing'
-      ? '#FFA500'
-      : '#4CAF50'};
+      ? theme.colors.nightPurple
+      : theme.colors.weeklyGreen};
 `;
 
 export const TodoCard = styled.div`

@@ -20,7 +20,7 @@ import {
   StyledButton,
 } from './styled/TodoStyles';
 import TodoForm from './TodoForm';
-import WeeklyTodo from './WeeklyTodo';
+import RoutineTodo from './RoutineTodo';
 import Sidebar from './Sidebar';
 
 interface TodoItem {
@@ -177,7 +177,7 @@ const Todo: React.FC = () => {
           <Sidebar />
           <ContentWrapper>
             <ContentArea>
-              <WeeklyTodo />
+              <RoutineTodo />
               <TodoContainer>
                 <DroppableColumn status="todo" onDrop={(id) => moveTask(id, 'todo')}>
                   <Column>

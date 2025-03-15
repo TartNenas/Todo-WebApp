@@ -10,7 +10,11 @@ import {
   FiSave, 
   FiEdit, 
   FiSmartphone, 
-  FiClock 
+  FiClock,
+  FiDroplet,
+  FiCircle,
+  FiType,
+  FiGrid
 } from 'react-icons/fi';
 
 const ChangelogContainer = styled.div`
@@ -168,6 +172,11 @@ const Changelog: React.FC = () => {
         {iconName === 'FaPaintBrush' && FiEdit({ size: 20 })}
         {iconName === 'FaMobileAlt' && FiSmartphone({ size: 20 })}
         {iconName === 'FaHistory' && FiClock({ size: 20 })}
+        {iconName === 'FaPalette' && FiDroplet({ size: 20 })}
+        {iconName === 'FaSwatchbook' && FiDroplet({ size: 20 })}
+        {iconName === 'FaCircle' && FiCircle({ size: 20 })}
+        {iconName === 'FaHeading' && FiType({ size: 20 })}
+        {iconName === 'FaIcons' && FiGrid({ size: 20 })}
       </IconWrapper>
     );
   };
@@ -185,7 +194,7 @@ const Changelog: React.FC = () => {
             {version.titleIcon && renderIcon(version.titleIcon)}
             {version.title}
             {version.isRolling && <ReleaseTag>Rolling</ReleaseTag>}
-            <VersionDate>{version.date}</VersionDate>
+            {version.date && <VersionDate>{version.date}</VersionDate>}
           </VersionTitle>
           
           <VersionDescription>

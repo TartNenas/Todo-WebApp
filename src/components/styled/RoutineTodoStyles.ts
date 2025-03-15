@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WeeklyContainer = styled.div`
+export const RoutineContainer = styled.div`
   background: ${({ theme }) => theme.colors.white};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: ${({ theme }) => theme.spacing.lg};
@@ -8,7 +8,7 @@ export const WeeklyContainer = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.medium};
 `;
 
-export const WeeklyHeader = styled.div`
+export const RoutineHeader = styled.div<{ routineType?: 'weekly' | 'morning' | 'night' }>`
   display: flex;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
@@ -17,7 +17,14 @@ export const WeeklyHeader = styled.div`
   h2 {
     font-size: ${({ theme }) => theme.typography.fontSize.large};
     margin: 0;
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ routineType, theme }) => 
+      routineType === 'weekly' 
+        ? theme.colors.weeklyGreen 
+        : routineType === 'morning' 
+        ? theme.colors.morningRed 
+        : routineType === 'night' 
+        ? theme.colors.nightPurple 
+        : theme.colors.primary};
     display: flex;
     align-items: center;
     gap: ${({ theme }) => theme.spacing.sm};
@@ -66,7 +73,7 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   height: 18px;
   border-radius: 4px;
   cursor: pointer;
-  accent-color: #4CAF50;
+  accent-color: ${({ theme }) => theme.colors.weeklyGreen};
 `;
 
 export const TaskName = styled.div`
@@ -78,12 +85,12 @@ export const TaskStatus = styled.div<{ status: 'not-started' | 'in-progress' | '
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
   border-radius: 12px;
   font-size: ${({ theme }) => theme.typography.fontSize.small};
-  background-color: ${({ status }) => 
+  background-color: ${({ status, theme }) => 
     status === 'not-started' 
-      ? '#dc6b6b'
+      ? theme.colors.morningRed
       : status === 'in-progress'
-      ? '#4a90c2'
-      : '#4CAF50'};
+      ? theme.colors.nightPurple
+      : theme.colors.weeklyGreen};
   color: white;
   text-align: center;
   width: fit-content;
@@ -93,7 +100,7 @@ export const TaskCategory = styled.div`
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
   border-radius: 12px;
   font-size: ${({ theme }) => theme.typography.fontSize.small};
-  background-color: #ff1493;
+  background-color: ${({ theme }) => theme.colors.nightPurple};
   color: white;
   text-align: center;
   width: fit-content;

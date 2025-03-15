@@ -27,11 +27,40 @@ export interface ChangelogData {
 const changelogData: ChangelogData = {
   versions: [
     {
+      versionNumber: "0.0.2",
+      title: "Color Scheme Update",
+      titleIcon: "FaPalette",
+      date: "",
+      description: "Implemented a consistent color scheme throughout the application for better visual coherence and user experience.",
+      changes: [
+        {
+          title: "Unified Color System",
+          icon: "FaSwatchbook",
+          description: "Standardized on three main colors: Green (#4CAF50), Red (#FF6B6B), and Purple (#845EC2) for consistent visual language."
+        },
+        {
+          title: "Status Indicators",
+          icon: "FaCircle",
+          description: "Updated status indicators to use consistent colors: Red for not started, Purple for in-progress, and Green for completed tasks."
+        },
+        {
+          title: "Routine Headers",
+          icon: "FaHeading",
+          description: "Color-coded routine headers to match their respective icons: Green for Weekly Tasks, Red for Morning Routine, and Purple for Night Routine."
+        },
+        {
+          title: "Sidebar Icons",
+          icon: "FaIcons",
+          description: "Updated sidebar icons to use the new color scheme, enhancing visual consistency across the application."
+        }
+      ]
+    },
+    {
       versionNumber: "0.0.1",
       title: "Initial Release",
       titleIcon: "FaRocket",
       isRolling: true,
-      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+      date: "",
       description: "First version of our Todo application with essential features to help you organize your tasks.",
       changes: [
         {
