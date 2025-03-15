@@ -136,14 +136,6 @@ const ChangeDescription = styled.div`
   color: ${({ theme }) => theme.colors.gray.dark};
 `;
 
-const CodeBlock = styled.code`
-  background: ${({ theme }) => theme.colors.gray.light};
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: 0.9em;
-`;
-
 const ReleaseTag = styled.span`
   background: ${({ theme }) => theme.colors.primary};
   color: white;
