@@ -32,7 +32,10 @@ export const theme = {
       xlarge: '1.5rem'
     }
   },
-  borderRadius: '4px',
+  borderRadius: {
+    md: '4px',
+    lg: '8px'
+  },
   shadows: {
     small: '0 2px 4px rgba(0,0,0,0.1)',
     medium: '0 4px 8px rgba(0,0,0,0.1)',
