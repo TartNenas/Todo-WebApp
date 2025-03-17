@@ -36,6 +36,16 @@ export const RoutineHeader = styled.div<{ routineType?: 'weekly' | 'morning' | '
   }
 `;
 
+export const CategoryBadge = styled.div`
+  background: ${({ theme }) => theme.colors.nightPurple};
+  color: white;
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-left: ${({ theme }) => theme.spacing.md};
+  font-weight: 500;
+`;
+
 export const TaskList = styled.div`
   display: flex;
   flex-direction: column;

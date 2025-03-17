@@ -27,6 +27,64 @@ export interface ChangelogData {
 const changelogData: ChangelogData = {
   versions: [
     {
+      versionNumber: "0.0.4",
+      title: "Enhanced Category Filtering",
+      titleIcon: "FaLayerGroup",
+      date: "",
+      description: "Extended category filtering to all routine types for a more consistent user experience.",
+      changes: [
+        {
+          title: "Universal Filtering",
+          icon: "FaFilter",
+          description: "Category filtering now works across all routine types: Weekly Tasks, Morning Routine, and Night Routine."
+        },
+        {
+          title: "Consistent Interface",
+          icon: "FaColumns",
+          description: "Maintained a consistent interface for filtering across all routine views."
+        },
+        {
+          title: "Visual Indicators",
+          icon: "FaTag",
+          description: "Added category badges to all routine types when a specific category is selected."
+        },
+        {
+          title: "Improved Navigation",
+          icon: "FaExchangeAlt",
+          description: "Categories remain selected when switching between different routine types."
+        }
+      ]
+    },
+    {
+      versionNumber: "0.0.3",
+      title: "Category Filtering",
+      titleIcon: "FaFilter",
+      date: "",
+      description: "Added the ability to filter weekly tasks by category for better organization and focus.",
+      changes: [
+        {
+          title: "Clickable Categories",
+          icon: "FaList",
+          description: "Categories in the sidebar are now clickable and will filter the weekly tasks view."
+        },
+        {
+          title: "Category Indicator",
+          icon: "FaTag",
+          description: "When a category is selected, a badge appears in the header showing the current filter."
+        },
+        {
+          title: "All Categories Option",
+          icon: "FaLayerGroup",
+          description: "Added an 'All Categories' option to view all tasks regardless of category."
+        },
+        {
+          title: "Empty State Messages",
+          icon: "FaInfoCircle",
+          description: "Improved empty state messages to indicate when no tasks exist for a selected category."
+        }
+      ]
+    },
+    {
       versionNumber: "0.0.2",
       title: "Color Scheme Update",
       titleIcon: "FaPalette",

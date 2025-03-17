@@ -16,11 +16,16 @@ import {
   FiUser, 
   FiActivity, 
   FiBriefcase, 
-  FiCoffee 
+  FiCoffee,
+  FiGrid
 } from 'react-icons/fi';
 
 const Sidebar: React.FC = () => {
-  const { selectedRoutine, setSelectedRoutine } = useRoutine();
+  const { selectedRoutine, setSelectedRoutine, selectedCategory, setSelectedCategory } = useRoutine();
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category as any);
+  };
 
   return (
     <SidebarContainer>
@@ -57,37 +62,64 @@ const Sidebar: React.FC = () => {
 
       <SectionTitle>Categories</SectionTitle>
       <MenuList>
-        <MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('All')}
+          className={selectedCategory === 'All' ? 'active' : ''}
+        >
+          <IconWrapper $color="#845EC2">
+            {FiGrid({ size: 20 })}
+          </IconWrapper>
+          All Categories
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('Journal')}
+          className={selectedCategory === 'Journal' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
             {FiBook({ size: 20 })}
           </IconWrapper>
           Journal
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('School')}
+          className={selectedCategory === 'School' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
             {FiBookOpen({ size: 20 })}
           </IconWrapper>
           School
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('Personal')}
+          className={selectedCategory === 'Personal' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
             {FiUser({ size: 20 })}
           </IconWrapper>
           Personal
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('Fitness')}
+          className={selectedCategory === 'Fitness' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
             {FiActivity({ size: 20 })}
           </IconWrapper>
           Fitness
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('Work')}
+          className={selectedCategory === 'Work' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
             {FiBriefcase({ size: 20 })}
           </IconWrapper>
           Work
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => handleCategoryClick('Cooking')}
+          className={selectedCategory === 'Cooking' ? 'active' : ''}
+        >
           <IconWrapper $color="#845EC2">
             {FiCoffee({ size: 20 })}
           </IconWrapper>

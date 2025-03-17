@@ -10,6 +10,7 @@ import {
   TaskStatus,
   TaskCategory,
   EmptyMessage,
+  CategoryBadge
 } from './styled/RoutineTodoStyles';
 import { StyledButton, Modal, ModalContent, Form, FormGroup, Label, Input, Select, ButtonGroup } from './styled/TodoStyles';
 import { useRoutine } from '../context/RoutineContext';
@@ -23,7 +24,7 @@ interface RoutineTask {
 }
 
 const RoutineTodo: React.FC = () => {
-  const { selectedRoutine } = useRoutine();
+  const { selectedRoutine, selectedCategory } = useRoutine();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [newTask, setNewTask] = useState({
     text: '',
@@ -67,6 +68,18 @@ const RoutineTodo: React.FC = () => {
       default:
         return weeklyTasks;
     }
+  };
+
+  // Get filtered tasks based on selected category
+  const getFilteredTasks = () => {
+    const tasks = getCurrentTasks();
+    
+    // Apply filtering for all routine types, not just weekly
+    if (selectedCategory !== 'All') {
+      return tasks.filter(task => task.category === selectedCategory);
+    }
+    
+    return tasks;
   };
 
   // Set the current tasks based on selected routine
@@ -137,48 +150,51 @@ const RoutineTodo: React.FC = () => {
 
   // Get the title and icon based on selected routine
   const getRoutineTitle = () => {
+    let baseTitle = '';
+    let icon;
+    
     switch (selectedRoutine) {
       case 'weekly':
-        return {
-          title: 'Weekly Tasks',
-          icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
-            </svg>
-          )
-        };
+        baseTitle = 'Weekly Tasks';
+        icon = (
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+          </svg>
+        );
+        break;
       case 'morning':
-        return {
-          title: 'Morning Routine',
-          icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
-            </svg>
-          )
-        };
+        baseTitle = 'Morning Routine';
+        icon = (
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+          </svg>
+        );
+        break;
       case 'night':
-        return {
-          title: 'Night Routine',
-          icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
-            </svg>
-          )
-        };
+        baseTitle = 'Night Routine';
+        icon = (
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+          </svg>
+        );
+        break;
       default:
-        return {
-          title: 'Weekly Tasks',
-          icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
-            </svg>
-          )
-        };
+        baseTitle = 'Weekly Tasks';
+        icon = (
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+          </svg>
+        );
     }
+    
+    // Add category to title if a specific category is selected
+    const title = selectedCategory === 'All' ? baseTitle : `${baseTitle} - ${selectedCategory}`;
+    
+    return { title, icon };
   };
 
   const { title, icon } = getRoutineTitle();
-  const tasks = getCurrentTasks();
+  const filteredTasks = getFilteredTasks();
 
   return (
     <RoutineContainer>
@@ -187,6 +203,9 @@ const RoutineTodo: React.FC = () => {
           {icon}
           {title}
         </h2>
+        {selectedCategory !== 'All' && (
+          <CategoryBadge>{selectedCategory}</CategoryBadge>
+        )}
         <StyledButton onClick={() => setIsFormOpen(true)} style={{ marginLeft: 'auto' }}>
           + Add Task
         </StyledButton>
@@ -199,10 +218,14 @@ const RoutineTodo: React.FC = () => {
           <div>Category</div>
           <div>Actions</div>
         </TableHeader>
-        {tasks.length === 0 ? (
-          <EmptyMessage>No tasks</EmptyMessage>
+        {filteredTasks.length === 0 ? (
+          <EmptyMessage>
+            {selectedCategory !== 'All' 
+              ? `No tasks in the ${selectedCategory} category` 
+              : 'No tasks'}
+          </EmptyMessage>
         ) : (
-          tasks.map(task => (
+          filteredTasks.map(task => (
             <TaskRow key={task.id}>
               <Checkbox
                 checked={task.completed}
@@ -254,10 +277,11 @@ const RoutineTodo: React.FC = () => {
                   onChange={e => setNewTask({ ...newTask, category: e.target.value })}
                 >
                   <option value="Personal">Personal</option>
-                  <option value="Work/School">Work/School</option>
-                  <option value="Health & Wellness">Health & Wellness</option>
+                  <option value="Work">Work</option>
+                  <option value="School">School</option>
                   <option value="Fitness">Fitness</option>
                   <option value="Cooking">Cooking</option>
+                  <option value="Journal">Journal</option>
                 </Select>
               </FormGroup>
 

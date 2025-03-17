@@ -14,7 +14,14 @@ import {
   FiDroplet,
   FiCircle,
   FiType,
-  FiGrid
+  FiGrid,
+  FiFilter,
+  FiList,
+  FiTag,
+  FiLayers,
+  FiInfo,
+  FiColumns,
+  FiRefreshCw
 } from 'react-icons/fi';
 
 const ChangelogContainer = styled.div`
@@ -177,6 +184,13 @@ const Changelog: React.FC = () => {
         {iconName === 'FaCircle' && FiCircle({ size: 20 })}
         {iconName === 'FaHeading' && FiType({ size: 20 })}
         {iconName === 'FaIcons' && FiGrid({ size: 20 })}
+        {iconName === 'FaFilter' && FiFilter({ size: 20 })}
+        {iconName === 'FaList' && FiList({ size: 20 })}
+        {iconName === 'FaTag' && FiTag({ size: 20 })}
+        {iconName === 'FaLayerGroup' && FiLayers({ size: 20 })}
+        {iconName === 'FaInfoCircle' && FiInfo({ size: 20 })}
+        {iconName === 'FaColumns' && FiColumns({ size: 20 })}
+        {iconName === 'FaExchangeAlt' && FiRefreshCw({ size: 20 })}
       </IconWrapper>
     );
   };
