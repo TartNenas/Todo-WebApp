@@ -7,6 +7,7 @@ import {
   IconWrapper,
 } from './styled/SidebarStyles';
 import { useRoutine } from '../context/RoutineContext';
+import DonateComponent from './ui/DonateComponent';
 import { 
   FiCalendar, 
   FiSun, 
@@ -29,6 +30,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <SidebarContainer>
+      <DonateComponent />
       <SectionTitle>Routines</SectionTitle>
       <MenuList>
         <MenuItem 

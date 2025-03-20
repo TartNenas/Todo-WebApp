@@ -59,4 +59,4 @@ export const IconWrapper = styled.span<{ $color?: string }>`
   background-color: ${({ $color, theme }) => $color || theme.colors.gray.light};
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.text};
-`; 
+`;
