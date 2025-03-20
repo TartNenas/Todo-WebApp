@@ -1,3 +1,30 @@
+import { 
+  FaHandHoldingHeart, 
+  FaDonate, 
+  FaShieldAlt, 
+  FaMobileAlt,
+  FaLayerGroup,
+  FaFilter,
+  FaColumns,
+  FaTag,
+  FaExchangeAlt,
+  FaList,
+  FaInfoCircle,
+  FaPalette,
+  FaSwatchbook,
+  FaCircle,
+  FaHeading,
+  FaIcons,
+  FaRocket,
+  FaCheckSquare,
+  FaChartBar,
+  FaCalendarWeek,
+  FaFolderOpen,
+  FaSave,
+  FaPaintBrush,
+  FaHistory
+} from 'react-icons/fa';
+
 export interface ChangeItem {
   title: string;
   description: string;
@@ -24,8 +51,33 @@ export interface ChangelogData {
   versions: VersionEntry[];
 }
 
+
 const changelogData: ChangelogData = {
   versions: [
+    {
+      versionNumber: "0.0.5",
+      title: "Donation Integration",
+      titleIcon: "FaHandHoldingHeart",
+      date: "",
+      description: "Added donation functionality to support humanitarian causes.",
+      changes: [
+        {
+          title: "Donation Component",
+          icon: "FaDonate",
+          description: "Integrated a new donation component in the sidebar for easy access to charitable giving."
+        },
+        {
+          title: "Secure Environment Configuration",
+          icon: "FaShieldAlt",
+          description: "Implemented secure donation URL handling through environment variables for enhanced security."
+        },
+        {
+          title: "Responsive Design",
+          icon: "FaMobileAlt",
+          description: "Ensured the donation section is fully responsive and integrates seamlessly with the existing sidebar layout."
+        }
+      ]
+    },
     {
       versionNumber: "0.0.4",
       title: "Enhanced Category Filtering",
@@ -166,4 +218,4 @@ const changelogData: ChangelogData = {
   ]
 };
 
-export default changelogData; 
+export default changelogData;
