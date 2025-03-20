@@ -1,34 +1,13 @@
-import { 
-  FaHandHoldingHeart, 
+import {  
   FaDonate, 
   FaShieldAlt, 
   FaMobileAlt,
-  FaLayerGroup,
-  FaFilter,
-  FaColumns,
-  FaTag,
-  FaExchangeAlt,
-  FaList,
-  FaInfoCircle,
-  FaPalette,
-  FaSwatchbook,
-  FaCircle,
-  FaHeading,
-  FaIcons,
-  FaRocket,
-  FaCheckSquare,
-  FaChartBar,
-  FaCalendarWeek,
-  FaFolderOpen,
-  FaSave,
-  FaPaintBrush,
-  FaHistory
 } from 'react-icons/fa';
 
 export interface ChangeItem {
   title: string;
   description: string;
-  icon?: string;
+  icon?: any; // Changed from string to any to accept icon components
 }
 
 export interface PatchNote {
@@ -63,17 +42,17 @@ const changelogData: ChangelogData = {
       changes: [
         {
           title: "Donation Component",
-          icon: "FaDonate",
+          icon: FaDonate,
           description: "Integrated a new donation component in the sidebar for easy access to charitable giving."
         },
         {
           title: "Secure Environment Configuration",
-          icon: "FaShieldAlt",
+          icon: FaShieldAlt,
           description: "Implemented secure donation URL handling through environment variables for enhanced security."
         },
         {
           title: "Responsive Design",
-          icon: "FaMobileAlt",
+          icon: FaMobileAlt,
           description: "Ensured the donation section is fully responsive and integrates seamlessly with the existing sidebar layout."
         }
       ]
